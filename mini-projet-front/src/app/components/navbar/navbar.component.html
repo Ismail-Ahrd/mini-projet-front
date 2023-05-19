@@ -1,0 +1,18 @@
+<nav class="my_navbar">
+  <a class="my_navbar_logo" routerLink="/">
+    <img ngSrc="assets/Logo.png" height="54" width="319">
+  </a>
+  <ul class="my_navbar_items">
+    <li *ngIf="isAgentControl">
+      <a [routerLinkActive]="'active'" routerLink="/prelevements">Prelevements</a>
+    </li>
+    <li *ngIf="isRespoLabo">
+      <a [routerLinkActive]="'active'" routerLink="resultatPrelevements">Resultats</a>
+    </li>
+  </ul>
+  <div class="my_navbar_avatar">
+    <a href="#">
+      <img *ngIf="isAgentControl || isRespoLabo" ngSrc="assets/avatar.png" height="50" width="50">
+    </a>
+  </div>
+</nav>
