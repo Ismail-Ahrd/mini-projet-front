@@ -18,6 +18,9 @@ import { PrelevementFormComponent } from './components/prelevement-form/prelevem
 import { ResultatFormComponent } from './components/resultat-form/resultat-form.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RegisterComponent } from './components/register/register.component';
+import { Routes } from '@angular/router';
+import jwtDecode from 'jwt-decode';
+import { PrelevementUpdateComponent } from './prelevement-update/prelevement-update.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { RegisterComponent } from './components/register/register.component';
     PrelevementFormComponent,
     ResultatFormComponent,
     FeedbackComponent,
-    RegisterComponent
+    RegisterComponent,
+    PrelevementUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ import { RegisterComponent } from './components/register/register.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   /*providers: [{
     provide :HTTP_INTERCEPTORS,
