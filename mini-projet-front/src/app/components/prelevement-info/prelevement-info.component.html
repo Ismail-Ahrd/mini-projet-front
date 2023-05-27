@@ -23,7 +23,7 @@
       </form>
     </div>
     <div class="top_right">
-      <button class="btn_add" (click)="goToPrelevementForm()"><i class="bi bi-plus-circle"> Ajouter</i></button>
+      <button *ngIf="authservice.decodedToken.type==='AGENT_CONTROLE'" class="btn_add" (click)="goToPrelevementForm()"><i class="bi bi-plus-circle"> Ajouter</i></button>
     </div>
   </div>
 
@@ -65,7 +65,7 @@
         </div>
         <div class="table_item">
           <button class="btn btn_update"
-                  (click)="handleUpdatePrelevement(prelevement)">
+                  (click)="handleUpdatePrelevement(prelevement, prelevementResponses.currentPage)">
             <i class="bi bi-pencil-fill icon"></i>
           </button>
         </div>

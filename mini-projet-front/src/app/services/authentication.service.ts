@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthRequest} from "../models/authRequest.model";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, map} from "rxjs";
 import {AuthResponse} from "../models/authResponse.model";
 import {RegisterRequest} from "../models/RegisterRequest.model";
 
@@ -9,6 +9,7 @@ import {RegisterRequest} from "../models/RegisterRequest.model";
   providedIn: 'root'
 })
 export class AuthenticationService {
+  decodedToken:any;
   backendHost: string = "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
@@ -19,13 +20,29 @@ export class AuthenticationService {
     request.email = email;
     request.password = password;
     //console.log(request);
-    return this.http.post<AuthResponse>(url,request);
+
+    return this.http.post<AuthResponse>(url,request).pipe(
+      map((response: any) => {
+        const authResponse = JSON.parse(response) as AuthResponse;
+        return authResponse;}))
+
+   
+    
   }
+  
 
   public register(registerRequest: RegisterRequest)  {
     let url: string = `${this.backendHost}/authentication/register`;
     console.log(registerRequest);
-    return this.http.post<AuthResponse>(url,registerRequest);
+    return this.http.post<AuthResponse>(url,registerRequest)}
+  
+  getBooleanValue() {
+    return this.booleanValue.asObservable();
   }
 
+  setBooleanValue(newValue: boolean) {
+    this.booleanValue.next(newValue);
+    
+  }
+  private booleanValue = new BehaviorSubject<boolean>(false);
 }

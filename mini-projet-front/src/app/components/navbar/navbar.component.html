@@ -1,13 +1,13 @@
 <nav class="my_navbar">
-  <a class="my_navbar_logo" routerLink="/">
+  <a class="my_navbar_logo" routerLink="/" (click)="direct()" >
     <img ngSrc="assets/Logo.png" height="54" width="319">
   </a>
   <ul class="my_navbar_items">
-    <li *ngIf="isAgentControl">
-      <a [routerLinkActive]="'active'" routerLink="/prelevements">Prelevements</a>
+    <li  >
+      <a [routerLinkActive]="'active'" routerLink="/prelevements">{{log? 'Prélévemenets':''}}</a>
     </li>
     <li *ngIf="isRespoLabo">
-      <a [routerLinkActive]="'active'" routerLink="resultatPrelevements">Resultats</a>
+      <a [routerLinkActive]="'active'" routerLink="resultatPrelevements">{{log? 'Résultats':''}}</a>
     </li>
   </ul>
   <div class="my_navbar_avatar">

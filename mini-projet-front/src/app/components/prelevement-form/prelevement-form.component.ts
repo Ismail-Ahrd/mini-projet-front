@@ -53,7 +53,7 @@ export class PrelevementFormComponent implements OnInit{
           this.prelevementFormGroup.value.niveauPrel = data.niveauPrel
           this.prelevementFormGroup.value.laboDestination = data.laboDestination
           this.prelevementFormGroup.value.dateEnvoie = data.dateEnvoie
-
+          console.log(this.prelevementFormGroup.value);
           /*this.prelevement.produitDTO.nom = data.produitDTO.nom
           this.prelevement.produitDTO.categorie = data.produitDTO.categorie
           this.prelevement.dateProcesVerbal = data.dateProcesVerbal

@@ -4,6 +4,10 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {RegisterRequest} from "../../models/RegisterRequest.model";
 import {AuthenticationService} from "../../services/authentication.service";
+import { AuthResponse } from 'src/app/models/authResponse.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+
 
 @Component({
   selector: 'app-register',
@@ -12,8 +16,9 @@ import {AuthenticationService} from "../../services/authentication.service";
 })
 export class RegisterComponent {
   registerRequest: RegisterRequest = new RegisterRequest();
+helper=new JwtHelperService();
 
-  constructor(private http: HttpClient,private router:Router, private authService: AuthenticationService) {
+  constructor(private http: HttpClient,private router:Router, private authService: AuthenticationService,private route:Router) {
 
   }
   profession!: string;
@@ -30,9 +35,15 @@ export class RegisterComponent {
     this.registerRequest.type = f.value.type
 
     this.authService.register(this.registerRequest).subscribe({
-      next: data => {
+      next: (data: AuthResponse) => {
         console.log(data.token);
         localStorage.setItem("token", data.token);
+      this.authService.setBooleanValue(true);
+      this.route.navigate(['feedback']);
+    
+    this.authService.decodedToken = this.helper.decodeToken(data.token);
+
+  console.log(this.authService.decodedToken);
       },
       error: err => {
         console.log(err);
@@ -43,3 +54,7 @@ export class RegisterComponent {
   }
 
 }
+function jwt_decode(token: string) {
+  throw new Error('Function not implemented.');
+}
+
