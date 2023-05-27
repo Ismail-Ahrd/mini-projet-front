@@ -18,6 +18,7 @@ import { PrelevementFormComponent } from './components/prelevement-form/prelevem
 import { ResultatFormComponent } from './components/resultat-form/resultat-form.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PrelevementUpdateComponent } from './components/prelevement-update/prelevement-update.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RegisterComponent } from './components/register/register.component';
     PrelevementFormComponent,
     ResultatFormComponent,
     FeedbackComponent,
-    RegisterComponent
+    RegisterComponent,
+    PrelevementUpdateComponent
   ],
   imports: [
     BrowserModule,

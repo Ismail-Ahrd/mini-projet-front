@@ -4,7 +4,7 @@ import {Prelevement, PrelevementResponse} from "../../models/prelevement.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {PageEvent} from "@angular/material/paginator";
 import {MatPaginator} from "@angular/material/paginator";
-import {Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 
 
 @Component({
@@ -15,17 +15,28 @@ import {Router} from "@angular/router";
 export class PrelevementInfoComponent implements OnInit{
   prelevementResponses!: PrelevementResponse;
   filterFormGroup!: FormGroup;
+  page: number = 0;
 
-  constructor(private prelevementService: PrelevementService, private fb: FormBuilder, private router: Router) {
+  constructor(private prelevementService: PrelevementService,
+              private fb: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      const pageString = params.get("page");
+      if (typeof pageString === "string") {
+        this.page = JSON.parse(pageString);
+      }
+    })
+
     this.filterFormGroup = this.fb.group({
       keyword: this.fb.control(""),
       etat: this.fb.control("")
     });
 
-    this.handleGetAllPrelevement("", "",  0, 5);
+    this.handleGetAllPrelevement("", "",  this.page, 5);
 
   }
 
@@ -42,6 +53,10 @@ export class PrelevementInfoComponent implements OnInit{
   }
 
   goToPage(page: number) {
+    const currentUrl = this.router.url;
+    const updatedUrl = currentUrl.replace(/;page=\d+/, '');
+    this.router.navigateByUrl(updatedUrl);
+
     let keyword: string = this.filterFormGroup.value.keyword;
     let etat: string = this.filterFormGroup.value.etat;
     this.handleGetAllPrelevement(keyword, etat, page, 5);
@@ -75,9 +90,10 @@ export class PrelevementInfoComponent implements OnInit{
     this.router.navigateByUrl("/prelvementForm");
   }
 
-  handleUpdatePrelevement(prelevement: Prelevement) {
+  handleUpdatePrelevement(prelevement: Prelevement, page: number) {
     //console.log(prelevement);
-    this.router.navigateByUrl(`prelevementForm/${prelevement.id}`)
+    this.router.navigate(
+      [`prelevementForm/${prelevement.id}`, {prelevement : JSON.stringify(prelevement), page} ])
   }
 
 }
