@@ -1,16 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+import {ActivatedRoute, Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 import { Produit } from '../models/produit.model';
 import { Prelevement } from '../models/prelevement.model';
 import { PrelevementService } from '../services/prelevement.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-prelevement-update',
   templateUrl: './prelevement-update.component.html',
   styleUrls: ['./prelevement-update.component.css']
 })
-export class PrelevementUpdateComponent {
+export class PrelevementUpdateComponent implements OnInit{
   @ViewChild('f') Signupfrom: NgForm | undefined;
   prelevementFormGroup!: FormGroup;
   produit: Produit = new Produit();

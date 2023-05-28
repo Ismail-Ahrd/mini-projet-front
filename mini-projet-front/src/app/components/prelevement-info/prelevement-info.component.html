@@ -12,7 +12,7 @@
           <input type="text" formControlName="keyword" class="filter_input">
         </div>
         <div class="filter_etat">
-          <label class="filter_label">Etat d'avncement:</label>
+          <label class="filter_label">Etat d'avancement:</label>
           <select class="filter_select" formControlName="etat">
             <option></option>
             <option value="EN_INSTANCE" >EN_INSTANCE</option>
@@ -23,7 +23,7 @@
       </form>
     </div>
     <div class="top_right">
-      <button *ngIf="authservice.decodedToken.type==='AGENT_CONTROLE'" class="btn_add" (click)="goToPrelevementForm()"><i class="bi bi-plus-circle"> Ajouter</i></button>
+      <button  class="btn_add" (click)="goToPrelevementForm()"><i class="bi bi-plus-circle"> Ajouter</i></button>
     </div>
   </div>
 
@@ -42,6 +42,7 @@
       <div class="table_item">Etat d’avancement</div>
       <div class="table_item"></div>
       <div class="table_item"></div>
+    
     </div>
     <ng-container *ngIf="prelevementResponses">
       <div class="table_body"  *ngFor="let prelevement of prelevementResponses.prelevementDTOS; let i = index">
@@ -68,6 +69,9 @@
                   (click)="handleUpdatePrelevement(prelevement, prelevementResponses.currentPage)">
             <i class="bi bi-pencil-fill icon"></i>
           </button>
+        </div>
+        <div class="table_item">
+          <button *ngIf="authservice.decodedToken.type==='RESPO_LABO'" class="btn_add" (click)="goToPrelevemenresultat(prelevement)"><i class="bi bi-plus-circle"> Ajouter</i></button>
         </div>
       </div>
 

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ResultatPrelevementService} from "../../services/resultat-prelevement.service";
 import {ResultatResponse} from "../../models/resultatPrelevement.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prelevement-resultat',
@@ -12,7 +14,8 @@ export class PrelevementResultatComponent implements OnInit{
   resultats!: ResultatResponse;
   searchFormGroup!: FormGroup;
 
-  constructor(private resultatService: ResultatPrelevementService, private fb:FormBuilder) {
+
+  constructor(private resultatService: ResultatPrelevementService, private fb:FormBuilder,public authservice:AuthenticationService,private Route:Router) {
   }
 
   ngOnInit(): void {
@@ -34,7 +37,7 @@ export class PrelevementResultatComponent implements OnInit{
       }
     })
   }
-
+  
 
   goToPage(page: number) {
     this.handleGetAllResultat(page, 5);

@@ -10,6 +10,9 @@ export interface ResultatPrelevementDtos {
   dateBA: string
   numeroBA: number
   conforme: boolean
+  dateTA:string
+  numeroTA:number
+  detail:string
   idPersonne: number
-  idPrelevement: number
+  idPrelevement:any
 }

@@ -96,5 +96,8 @@ export class PrelevementInfoComponent implements OnInit{
     this.router.navigate(
       [`prelevementForm/${prelevement.id}`, {prelevement : JSON.stringify(prelevement), page} ])
   }
-
+  goToPrelevemenresultat(prelevement: Prelevement){
+    this.router.navigate(['/resultatForm',prelevement.id])
+  
+      }
 }
