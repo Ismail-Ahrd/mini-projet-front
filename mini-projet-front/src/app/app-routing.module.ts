@@ -7,11 +7,12 @@ import {PrelevementFormComponent} from "./components/prelevement-form/prelevemen
 import {ResultatFormComponent} from "./components/resultat-form/resultat-form.component";
 import {FeedbackComponent} from "./components/feedback/feedback.component";
 import {RegisterComponent} from "./components/register/register.component";
+import {PrelevementUpdateComponent} from "./components/prelevement-update/prelevement-update.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "prelevements", component: PrelevementInfoComponent },
-  { path: "prelevementForm/:id", component: PrelevementFormComponent},
+  { path: "prelevementForm/:id", component: PrelevementUpdateComponent},
   { path: "resultatPrelevements", component: PrelevementResultatComponent },
   {path: "prelvementForm", component: PrelevementFormComponent},
   {path: "resultatForm", component: ResultatFormComponent},

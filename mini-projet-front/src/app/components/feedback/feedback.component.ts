@@ -22,6 +22,6 @@ export class FeedbackComponent {
     })
   }
   goToPrelevement() {
-    this.router.navigateByUrl('/prelevements')
+    this.router.navigate(['/prelevements', {page: this.page}])
   }
 }
