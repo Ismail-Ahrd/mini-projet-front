@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "prelevementForm/:id", component: PrelevementUpdateComponent},
   { path: "resultatPrelevements", component: PrelevementResultatComponent },
   {path: "prelvementForm", component: PrelevementFormComponent},
-  {path: "resultatForm", component: ResultatFormComponent},
+  {path: "resultatForm/:id", component: ResultatFormComponent},
   {path: "feedback", component: FeedbackComponent},
   {path: "register", component: RegisterComponent}
 ];

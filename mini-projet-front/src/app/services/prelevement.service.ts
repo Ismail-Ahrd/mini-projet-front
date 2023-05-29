@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Prelevement, PrelevementResponse} from "../models/prelevement.model";
+import {ResultatPrelevementDtos} from "../models/resultatPrelevement.model";
+import {AuthenticationService} from "./authentication.service";
 
 
 @Injectable({
@@ -9,12 +11,13 @@ import {Prelevement, PrelevementResponse} from "../models/prelevement.model";
 })
 export class PrelevementService {
   backendHost: string = "http://localhost:8080";
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private authService: AuthenticationService) { }
 
   public getAllPrelevement(keyword: string, etat: string,
-                           page: number, size: number): Observable<PrelevementResponse> {
+                           page: number, size: number): Observable<PrelevementResponse>
+  {
     let url: string =
-      `${this.backendHost}/prelevement/personne?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}`;
+        `${this.backendHost}/prelevement/personne?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}`;
     const token = localStorage.getItem("token");
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,8 +25,13 @@ export class PrelevementService {
         'Authorization': 'Bearer ' + token
       })
     };
+    if(this.authService.decodedToken.labo){
+      console.log("teeeeest")
+      url = `${this.backendHost}/prelevement/labo?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}`;
+    }
     return this.http.get<PrelevementResponse>(url, httpOptions);
   }
+
 
   public savePrelevement(prelevement:  Prelevement) {
     let url: string = `${this.backendHost}/prelevement`;

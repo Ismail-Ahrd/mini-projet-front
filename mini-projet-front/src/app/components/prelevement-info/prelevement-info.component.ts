@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {PageEvent} from "@angular/material/paginator";
 import {MatPaginator} from "@angular/material/paginator";
 import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -16,14 +17,25 @@ export class PrelevementInfoComponent implements OnInit{
   prelevementResponses!: PrelevementResponse;
   filterFormGroup!: FormGroup;
   page: number = 0;
+  decodedToken!: any;
 
   constructor(private prelevementService: PrelevementService,
               private fb: FormBuilder,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,public authservice:AuthenticationService) {
   }
 
   ngOnInit(): void {
+    this.authservice.getDecodeToken().subscribe({
+      next: data => {
+        this.decodedToken = data;
+        console.log(data)
+      },
+      error : err => {
+        console.log(err);
+      }
+    })
+
     this.activatedRoute.paramMap.subscribe(params => {
       const pageString = params.get("page");
       if (typeof pageString === "string") {
@@ -63,7 +75,7 @@ export class PrelevementInfoComponent implements OnInit{
   }
 
   handleDeletePrelevement(id: number, page: number, size: number) {
-    console.log(id, page, size);
+    //console.log(id, page, size);
     let keyword: string = this.filterFormGroup.value.keyword;
     let etat: string = this.filterFormGroup.value.etat;
     let conf: boolean = confirm("Êtes-vous sûr?");
@@ -93,7 +105,10 @@ export class PrelevementInfoComponent implements OnInit{
   handleUpdatePrelevement(prelevement: Prelevement, page: number) {
     //console.log(prelevement);
     this.router.navigate(
-      [`prelevementForm/${prelevement.id}`, {prelevement : JSON.stringify(prelevement), page} ])
+        [`prelevementForm/${prelevement.id}`, {prelevement : JSON.stringify(prelevement), page} ])
   }
 
+  goToPrelevemenresultat(prelevement: Prelevement) {
+    this.router.navigate(['/resultatForm',prelevement.id]);
+  }
 }

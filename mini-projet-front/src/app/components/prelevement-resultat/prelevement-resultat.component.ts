@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ResultatPrelevementService} from "../../services/resultat-prelevement.service";
-import {ResultatResponse} from "../../models/resultatPrelevement.model";
+import {ResultatPrelevementDtos, ResultatResponse} from "../../models/resultatPrelevement.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prelevement-resultat',
@@ -12,7 +14,11 @@ export class PrelevementResultatComponent implements OnInit{
   resultats!: ResultatResponse;
   searchFormGroup!: FormGroup;
 
-  constructor(private resultatService: ResultatPrelevementService, private fb:FormBuilder) {
+
+  constructor(private resultatService: ResultatPrelevementService,
+              private fb:FormBuilder,
+              public authservice:AuthenticationService,
+              private Route:Router) {
   }
 
   ngOnInit(): void {
@@ -27,7 +33,11 @@ export class PrelevementResultatComponent implements OnInit{
     this.resultatService.getAllResultat(page, size).subscribe({
       next: data => {
         this.resultats=data;
-        //console.log(data);
+        this.resultats.resultatPrelevementDTOS.forEach(resultat => {
+          if(!resultat.conforme) {
+            this.handleGetDetail(resultat);
+          }
+        })
       },
       error: err => {
         console.log(err);
@@ -35,6 +45,19 @@ export class PrelevementResultatComponent implements OnInit{
     })
   }
 
+  handleGetDetail(resultat: ResultatPrelevementDtos) {
+    this.resultatService.getDetailNonConformite(resultat.id).subscribe({
+      next: data => {
+        resultat.dateTA=data.dateTA;
+        resultat.numeroTA=data.numeroTA;
+        resultat.detail=data.detail;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+  
 
   goToPage(page: number) {
     this.handleGetAllResultat(page, 5);

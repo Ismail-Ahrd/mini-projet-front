@@ -1,12 +1,12 @@
-<div class="header"> Enregister les résultats de prélèvement d'échantillons:</div>
+<div class="header"> Enregister les résultats de prélèvement d'échantillons:{{resultat.idPrelevement}}</div>
 <form (ngSubmit)="onSubmit()" #f="ngForm">
   <div class="Nom">
     <div class="Nom3"> <label for="Nom" >Numéro BA:</label>
-      <input placeholder="ex:2334" type="text" ngModel  name="Nom" required> </div>
-    <div class="Nom3"><label for="date">Date dde BA:</label>
-      <input type="date" ngModel name="date1" required> </div>
+      <input placeholder="ex:2334" type="text" ngModel  name="numeroBA" required number> </div>
+    <div class="Nom3"><label for="date">Date de BA:</label>
+      <input type="date" ngModel name="date_BA" required> </div>
     <div class="Nom3">  <label for="Typeprel">Conformité:</label>
-      <select [(ngModel)]="selected"  name="choice">
+      <select [(ngModel)]="selected"  name="choix">
         <option >Oui</option>
         <option >Non</option>
       </select></div></div>
@@ -15,13 +15,11 @@
     <div class="header2">Détail de non conformité</div>
     <div class="form2">  <div class="Nom2"> <label for="Nom" >Numéro TA:</label>
 
-      <input placeholder="ex:2334" type="text" ngModel  name="Nom" required></div>
+      <input placeholder="ex:2334" type="text" ngModel  name="NuméroTA" required number></div>
       <div class="Nom2"><label for="Nom" >Date TA:</label>
-        <input  type="Date" ngModel  name="Nom" required></div>
-      <div class="Nom2"> <label for="Nom" >Date TA:</label>
-        <input  type="Date" ngModel  name="Nom" required></div>
+        <input  type="Date" ngModel  name="DateTA" required></div>
       <div class="Nom2"> <label for="Nom" >Détail:</label>
-        <input  type="text" ngModel  name="Nom" required>
+        <input  type="text" ngModel  name="Détail" required>
       </div></div>
   </div>
   <button type="submit" [disabled]="!f.valid" class="btn btn-success">Soumettre</button>

@@ -4,4 +4,5 @@ export class RegisterRequest {
   email!: string
   mdp!: string
   type!: string
+  labo?: string
 }

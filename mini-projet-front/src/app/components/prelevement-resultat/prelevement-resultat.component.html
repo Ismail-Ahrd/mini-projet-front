@@ -6,21 +6,20 @@
         <button class="search_bar_btn"><i class="bi bi-search"> Chercher</i></button>
       </form>
     </div>
-    <div class="top_right">
-      <button class="btn_add"><i class="bi bi-plus-circle"> Ajouter</i></button>
-    </div>
+   
   </div>
 
   <div class="table">
     <div class="table_head">
       <div class="table_item">ID</div>
       <div class="table_item">Réf prélévement</div>
+      <div class="table_item">Produit</div>
       <div class="table_item">Numéro BA</div>
       <div class="table_item">Date BA</div>
       <div class="table_item">Conformité</div>
-      <!--<div class="table_item">Numéro TA</div>
+      <div class="table_item">Numéro TA</div>
       <div class="table_item">Date TA</div>
-      <div class="table_item">Détail</div>-->
+      <div class="table_item">Détail</div>
       <div class="table_item"></div>
       <div class="table_item"></div>
     </div>
@@ -28,12 +27,13 @@
       <div class="table_body" *ngFor="let resultat of resultats.resultatPrelevementDTOS; let i=index">
         <div class="table_item">{{resultat.id}}</div>
         <div class="table_item">{{resultat.idPrelevement}}</div>
+        <div class="table_item">{{resultat.nomProduit}}</div>
         <div class="table_item">{{resultat.numeroBA}}</div>
         <div class="table_item">{{resultat.dateBA | date : 'dd-MM-YYYY'}}</div>
-        <div class="table_item">{{resultat.conforme}}</div>
-        <!--<div class="table_item"></div>
-        <div class="table_item"></div>
-        <div class="table_item"></div>-->
+        <div class="table_item">{{resultat.conforme? 'Oui':'Non'}}</div>
+        <div class="table_item">{{resultat.conforme? '-':resultat.numeroTA}}</div>
+        <div class="table_item">{{resultat.conforme? '-':resultat.dateTA}}</div>
+        <div class="table_item">{{resultat.conforme? '-':resultat.detail}}</div>
         <div class="table_item">
           <button class="btn btn_delete">
             <i class="bi bi-trash-fill icon"></i>
