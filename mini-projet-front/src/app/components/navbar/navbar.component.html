@@ -11,8 +11,12 @@
     </li>
   </ul>
   <div class="my_navbar_avatar">
-    <a href="#">
-      <img *ngIf="isAgentControl || isRespoLabo" ngSrc="assets/avatar.png" height="50" width="50">
-    </a>
+    <img (click)="open()" ngSrc="assets/avatar.png" height="50" width="50">
   </div>
 </nav>
+<div *ngIf="log" [ngClass]="status ? 'success' : 'danger'" class="MENU" >
+  <div class="menu">
+    <div>Mr {{authservice.decodedToken.nom}}</div>
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>

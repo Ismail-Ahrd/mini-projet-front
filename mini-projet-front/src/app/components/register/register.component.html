@@ -15,6 +15,7 @@
       <div class="Nom">
         <label>Email:</label>
         <input ngModel name="email" required  type="email">
+        <p class="error" *ngIf="Message" >{{Message}}</p>
       </div>
 
       <div class="Nom">
@@ -62,4 +63,3 @@
     </form>
   </div>
 </div>
-

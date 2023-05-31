@@ -11,6 +11,7 @@ import {RegisterRequest} from "../models/RegisterRequest.model";
 export class AuthenticationService {
   decodedToken:any;
   backendHost: string = "http://localhost:8080";
+  private booleanValue = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
@@ -19,15 +20,12 @@ export class AuthenticationService {
     let request: AuthRequest = new AuthRequest();
     request.email = email;
     request.password = password;
-    //console.log(request);
-
     return this.http.post<AuthResponse>(url,request);
   }
 
 
   public register(registerRequest: RegisterRequest)  {
     let url: string = `${this.backendHost}/authentication/register`;
-    console.log(registerRequest);
     return this.http.post<AuthResponse>(url,registerRequest)
   }
 
@@ -45,7 +43,19 @@ export class AuthenticationService {
 
   setBooleanValue(newValue: boolean) {
     this.booleanValue.next(newValue);
-
   }
-  private booleanValue = new BehaviorSubject<boolean>(false);
+
+
+  public logout(){
+    let url: string = `${this.backendHost}/authentication/logout`;
+    this.http.post(url,{}).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => {
+        console.log(err)
+      }
+    });
+  }
+
 }

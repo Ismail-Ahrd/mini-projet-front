@@ -28,6 +28,7 @@ export class PrelevementInfoComponent implements OnInit{
   ngOnInit(): void {
     this.authservice.getDecodeToken().subscribe({
       next: data => {
+        console.log("hello")
         this.decodedToken = data;
         console.log(data)
       },

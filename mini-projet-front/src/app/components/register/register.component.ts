@@ -21,6 +21,7 @@ export class RegisterComponent {
   mdp!: string;
   cmdp!:string;
   labo!:string;
+  Message!: string;
 
   constructor(private http: HttpClient,private router:Router,
               private authService: AuthenticationService,private route:Router) {
@@ -41,6 +42,7 @@ export class RegisterComponent {
 
     this.authService.register(this.registerRequest).subscribe({
       next: (data: AuthResponse) => {
+
         console.log(data.token);
         localStorage.setItem("token", data.token);
         this.authService.setBooleanValue(true);
@@ -49,9 +51,11 @@ export class RegisterComponent {
         this.route.navigate(['feedback']);
       },
       error: err => {
-        console.log(err);
-      }
-    });
+        if (err.status === 400 && err.error ) {
+          this.Message = err.error.errorMessage;
+
+        }}});
+
 
 
   }
@@ -60,4 +64,3 @@ export class RegisterComponent {
 function jwt_decode(token: string) {
   throw new Error('Function not implemented.');
 }
-

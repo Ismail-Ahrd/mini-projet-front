@@ -13,19 +13,30 @@ export class NavbarComponent {
   isRespoLabo: boolean = true;
   isAgentControl: boolean = true;
   log: boolean | undefined;
+  status!: boolean;
+  constructor(private Http:HttpClient,public authservice:AuthenticationService,private router:Router){
+    authservice.getBooleanValue().subscribe(value =>
+        this.log=value)}
 
-  constructor(private Http:HttpClient,private AUTH:AuthenticationService,private router:Router){
-  AUTH.getBooleanValue().subscribe(value =>
-    this.log=value)}
-  
-
+  open(){
+    this.status=!this.status;
+  }
   direct(){
     if(this.log==true){
       this.router.navigateByUrl('/prelevements')
-
     }
     else{
       this.router.navigateByUrl('/')
     }
-  }  
+  }
+  logout(){
+    this.authservice.logout;
+    let jwt= localStorage.getItem('token');
+    if(jwt){
+      localStorage.removeItem('token');
+      this.status=!this.status
+      this.log=false;
+      this.router.navigateByUrl('/');
+    }
+  }
 }
