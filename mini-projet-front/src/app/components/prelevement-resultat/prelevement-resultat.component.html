@@ -20,8 +20,8 @@
       <div class="table_item">Numéro TA</div>
       <div class="table_item">Date TA</div>
       <div class="table_item">Détail</div>
-      <div class="table_item"></div>
-      <div class="table_item"></div>
+      <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'"></div>
+      <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'"></div>
     </div>
     <ng-container *ngIf="resultats">
       <div class="table_body" *ngFor="let resultat of resultats.resultatPrelevementDTOS; let i=index">
@@ -34,12 +34,12 @@
         <div class="table_item">{{resultat.conforme? '-':resultat.numeroTA}}</div>
         <div class="table_item">{{resultat.conforme? '-':resultat.dateTA}}</div>
         <div class="table_item">{{resultat.conforme? '-':resultat.detail}}</div>
-        <div class="table_item">
+        <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'">
           <button class="btn btn_delete">
             <i class="bi bi-trash-fill icon"></i>
           </button>
         </div>
-        <div class="table_item">
+        <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'">
           <button class="btn btn_update">
             <i class="bi bi-pencil-fill icon"></i>
           </button>

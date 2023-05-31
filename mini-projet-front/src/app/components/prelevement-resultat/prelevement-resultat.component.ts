@@ -13,15 +13,21 @@ import { Router } from '@angular/router';
 export class PrelevementResultatComponent implements OnInit{
   resultats!: ResultatResponse;
   searchFormGroup!: FormGroup;
+  typePersonne!: string;
 
 
   constructor(private resultatService: ResultatPrelevementService,
+              private authService: AuthenticationService,
               private fb:FormBuilder,
               public authservice:AuthenticationService,
               private Route:Router) {
   }
 
   ngOnInit(): void {
+    this.authservice.getDecodeToken().subscribe(data => {
+      this.typePersonne = data.type;
+    })
+
     this.searchFormGroup = this.fb.group({
       keyword: this.fb.control("")
     });

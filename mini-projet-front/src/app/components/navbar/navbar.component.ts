@@ -15,8 +15,8 @@ export class NavbarComponent {
   log: boolean | undefined;
   status!: boolean;
   constructor(private Http:HttpClient,public authservice:AuthenticationService,private router:Router){
-    authservice.getBooleanValue().subscribe(value =>
-        this.log=value)}
+    authservice.getBooleanValue().subscribe(value => this.log=value);
+  }
 
   open(){
     this.status=!this.status;

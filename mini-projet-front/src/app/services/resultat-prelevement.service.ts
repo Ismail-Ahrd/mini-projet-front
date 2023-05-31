@@ -19,13 +19,24 @@ export class ResultatPrelevementService {
         idPersonne=data.idPersonne;
         console.log(idPersonne);
       },
-      error: err => {
-        console.log(err);
-      }
+      error: err => console.log(err)
     });
 
-    let url: string =
-      `${this.backendHost}/resultatPrelevement/personne/${idPersonne}?page=${page}&size=${size}`;
+    let type;
+    this.authService.getDecodeToken().subscribe({
+      next: data => {
+        type=data.type;
+      },
+      error: err =>  console.log(err)
+    });
+
+    let url;
+    if (type === "AGENT_CONTROLE") {
+      url = `${this.backendHost}/resultatPrelevement/personne/prelevement/${idPersonne}?page=${page}&size=${size}`;
+    } else {
+      url =`${this.backendHost}/resultatPrelevement/personne/${idPersonne}?page=${page}&size=${size}`;
+    }
+
     const token = localStorage.getItem("token");
     const httpOptions = {
       headers: new HttpHeaders({

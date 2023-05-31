@@ -22,8 +22,10 @@
         <button class="filter_btn"><i class="bi bi-search"> Chercher</i></button>
       </form>
     </div>
-    <div class="top_right">
-      <button  class="btn_add" (click)="goToPrelevementForm()"><i class="bi bi-plus-circle"> Ajouter</i></button>
+    <div class="top_right" *ngIf="decodedToken.type==='AGENT_CONTROLE'">
+      <button  class="btn_add" (click)="goToPrelevementForm()">
+        <i class="bi bi-plus-circle"> Ajouter</i>
+      </button>
     </div>
   </div>
 
@@ -71,10 +73,11 @@
             <i class="bi bi-pencil-fill icon"></i>
           </button>
         </div>
-        <div class="table_item table_item_special" *ngIf="decodedToken.type==='RESPO_LABO'">
-          <button  class="btn_add" (click)="goToPrelevemenresultat(prelevement)">
-            <i class="bi bi-plus-circle"> Ajouter</i>
+        <div class="table_item_special" *ngIf="decodedToken.type==='RESPO_LABO'">
+          <button *ngIf="prelevement.etatAvancement === 'EN_INSTANCE'" class="btn btn-outline-primary btn_special_add" (click)="goToPrelevemenresultat(prelevement)">
+            <i class="bi bi-plus-circle"> Enregistrer le resultat</i>
           </button>
+          <i class="bi bi-check-circle text-success" *ngIf="prelevement.etatAvancement === 'TERMINEE'"> Resultat Enregistré</i>
         </div>
       </div>
 

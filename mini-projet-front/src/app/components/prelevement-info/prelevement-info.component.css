@@ -120,14 +120,23 @@
 }
 
 .table_item_special {
-  width: 15.38%;
-}
-
-.table_item_special button {
-  width: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 15.38%;
+  height: 100%;
+  border-right: solid #CCCCCC 1px;
+  border-bottom: solid #CCCCCC 1px;
+}
+.btn_special_add {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_special_add:hover {
+  color: black;
 }
 
 .btn {

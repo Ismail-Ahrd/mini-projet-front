@@ -10,7 +10,7 @@
       <a [routerLinkActive]="'active'" routerLink="resultatPrelevements">{{log? 'Résultats':''}}</a>
     </li>
   </ul>
-  <div class="my_navbar_avatar">
+  <div class="my_navbar_avatar" *ngIf="log">
     <img (click)="open()" ngSrc="assets/avatar.png" height="50" width="50">
   </div>
 </nav>
