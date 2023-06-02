@@ -6,12 +6,12 @@
 .top {
   margin-top: 30px;
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  align-items: flex-start;
 }
 
 .top_left {
-  width: 40%;
+  margin-left: 20px;
+  width: 30%;
 }
 
 .search_bar {
@@ -29,11 +29,13 @@
 .search_bar_btn {
   width: 30%;
   padding: 5px 10px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   color:  #3A46B5;
   border: solid  #3A46B5 1px;
-  font-size: 20px;
+  font-size: 18px;
   height: 35px;
 }
 
@@ -73,6 +75,7 @@
 }
 
 .table_head {
+  font-weight: 500;
   background-color: #C7E1F6;
 }
 

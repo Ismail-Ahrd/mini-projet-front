@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import { RegisterRequest } from 'src/app/models/RegisterRequest.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
 })
-export class FeedbackComponent implements OnInit {
-  page!: number;
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+export class FeedbackComponent {
+  page: number=0;
+  private RegisterRequest!: RegisterRequest;
+  constructor(private router: Router,public authservice:AuthenticationService , private activatedRoute: ActivatedRoute) {
   }
-
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       const pageString = params.get("page")
@@ -20,7 +21,6 @@ export class FeedbackComponent implements OnInit {
       }
     })
   }
-
   goToPrelevement() {
     this.router.navigate(['/prelevements', {page: this.page}])
   }

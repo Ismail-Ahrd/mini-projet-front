@@ -8,16 +8,19 @@ import {ResultatFormComponent} from "./components/resultat-form/resultat-form.co
 import {FeedbackComponent} from "./components/feedback/feedback.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {PrelevementUpdateComponent} from "./components/prelevement-update/prelevement-update.component";
+import {AuthGuard} from "./guards/auth.guard";
+import {LogGuard} from "./guards/log.guard";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "prelevements", component: PrelevementInfoComponent },
-  { path: "prelevementForm/:id", component: PrelevementUpdateComponent},
-  { path: "resultatPrelevements", component: PrelevementResultatComponent },
-  {path: "prelvementForm", component: PrelevementFormComponent},
-  {path: "resultatForm", component: ResultatFormComponent},
-  {path: "feedback", component: FeedbackComponent},
-  {path: "register", component: RegisterComponent}
+  { path: "prelevements", component: PrelevementInfoComponent, canActivate: [AuthGuard]},
+  { path: "prelevementForm/:id", component: PrelevementUpdateComponent, canActivate: [AuthGuard]},
+  { path: "resultatPrelevements", component: PrelevementResultatComponent, canActivate: [AuthGuard] },
+  {path: "prelvementForm", component: PrelevementFormComponent, canActivate: [AuthGuard]},
+  {path: "resultatForm/:id", component: ResultatFormComponent, canActivate: [AuthGuard]},
+  {path: "feedback", component: FeedbackComponent, canActivate: [AuthGuard]},
+  {path: "register", component: RegisterComponent},
+  {path: "**", redirectTo: ""}
 ];
 
 @NgModule({

@@ -3,37 +3,48 @@
   <div class="box">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="my_container">
       <div class="Nom">
-        <label for="Nom" >Nom:</label>
+        <label>Nom:</label>
         <input ngModel name="nom" required type="text">
       </div>
 
       <div class="Nom">
-        <label for="Nom">Prénom:</label>
+        <label>Prénom:</label>
         <input ngModel name="prenom" required type="text">
       </div>
 
       <div class="Nom">
-        <label for="Nom">Email:</label>
+        <label>Email:</label>
         <input ngModel name="email" required  type="email">
+        <p class="error" *ngIf="Message" >{{Message}}</p>
       </div>
 
       <div class="Nom">
-        <label for="Nom2">Profession:</label>
+        <label>Profession:</label>
         <select  [(ngModel)]="profession" name="type" required >
           <option>AGENT_CONTROLE</option>
           <option >RESPO_LABO</option>
         </select>
       </div>
 
+      <div class="Nom" *ngIf="f.value.type=='RESPO_LABO'">
+        <label>Nom de Labo:</label>
+        <select  [(ngModel)]="labo" name="lobo" required >
+          <option>LOARC</option>
+          <option >LRAR</option>
+        </select>
+      </div>
+      <div *ngIf="f.value.type=='RESPO_LABO'"></div>
+
       <div class="Nom">
-        <label  for="Nom">Mot de passe:</label>
+        <label>Mot de passe:</label>
         <input [(ngModel)]="mdp" name="mdp" required type="password">
       </div>
 
       <div class="Nom">
-        <label  for="Nom">Confirmer mot de passe:</label>
+        <label>Confirmer mot de passe:</label>
         <input [(ngModel)]="cmdp" name="cmdp" required  type="password" >
       </div>
+
 
       <button type="submit" [disabled]="!f.valid || cmdp != mdp" class="btn btn-primary buttons">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
@@ -52,4 +63,3 @@
     </form>
   </div>
 </div>
-

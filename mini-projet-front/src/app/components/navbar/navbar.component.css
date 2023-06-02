@@ -39,4 +39,38 @@
 .active {
   border-bottom: solid #6095C1 2px;
 }
+.MENU{
+  display: flex;
 
+
+  justify-content: end;
+
+}
+.menu{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  background-color: #6095C1;
+  padding: 2%;
+  position: absolute;
+}
+.menu div{
+  font-weight: bold;
+  font-size: 20px;
+
+
+}
+.menu button{
+  margin-top: 2%;
+  font-weight: bold;
+  padding: 3%;
+  background-color: green;
+  border-radius:45px ;
+}
+.danger{
+  display: none;
+  transition: 1s;
+}
+.success{
+  transition: 1s;
+}
