@@ -22,6 +22,7 @@ import { Routes } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 
 import { PrelevementUpdateComponent } from './components/prelevement-update/prelevement-update.component';
+import { ResultatUpdateComponent } from './components/resultat-update/resultat-update.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PrelevementUpdateComponent } from './components/prelevement-update/prel
     ResultatFormComponent,
     FeedbackComponent,
     RegisterComponent,
-    PrelevementUpdateComponent
+    PrelevementUpdateComponent,
+    ResultatUpdateComponent
   ],
   imports: [
     BrowserModule,

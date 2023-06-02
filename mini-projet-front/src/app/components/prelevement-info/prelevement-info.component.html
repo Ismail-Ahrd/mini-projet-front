@@ -2,14 +2,14 @@
 
   <div class="top">
     <div class="top_left">
-      <!--<form class="search_bar" [formGroup]="searchFormGroup" (ngSubmit)="handleSearchPrelevement()">
-        <input class="search_bar_input" type="text" formControlName="keyword">
-        <button class="search_bar_btn"><i class="bi bi-search"> Chercher</i></button>
-      </form>-->
       <form [formGroup]="filterFormGroup" (ngSubmit)="handleFilterPrelevement()" class="filter_form">
         <div class="filter_name">
           <label class="filter_label">Nom du produit: </label>
           <input type="text" formControlName="keyword" class="filter_input">
+        </div>
+        <div class="filter_number">
+          <label class="filter_label">Numéro de Proces Verbal: </label>
+          <input type="number" formControlName="numeroProcesVerbal" class="filter_input filter_input_number">
         </div>
         <div class="filter_etat">
           <label class="filter_label">Etat d'avancement:</label>
@@ -23,6 +23,7 @@
       </form>
     </div>
     <div class="top_right" *ngIf="decodedToken.type==='AGENT_CONTROLE'">
+
       <button  class="btn_add" (click)="goToPrelevementForm()">
         <i class="bi bi-plus-circle"> Ajouter</i>
       </button>

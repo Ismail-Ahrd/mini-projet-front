@@ -14,10 +14,10 @@ export class PrelevementService {
   constructor(private http : HttpClient, private authService: AuthenticationService) { }
 
   public getAllPrelevement(keyword: string, etat: string,
-                           page: number, size: number): Observable<PrelevementResponse>
+                           numeroProcesVerbal: string, page: number, size: number): Observable<PrelevementResponse>
   {
     let url: string =
-        `${this.backendHost}/prelevement/personne?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}`;
+        `${this.backendHost}/prelevement/personne?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}&numeroProcesVerbal=${numeroProcesVerbal}`;
     const token = localStorage.getItem("token");
     const httpOptions = {
       headers: new HttpHeaders({
@@ -26,8 +26,7 @@ export class PrelevementService {
       })
     };
     if(this.authService.decodedToken.labo){
-      console.log("teeeeest")
-      url = `${this.backendHost}/prelevement/labo?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}`;
+      url = `${this.backendHost}/prelevement/labo?keyword=${keyword}&page=${page}&size=${size}&etat=${etat}&numeroProcesVerbal=${numeroProcesVerbal}`;
     }
     return this.http.get<PrelevementResponse>(url, httpOptions);
   }

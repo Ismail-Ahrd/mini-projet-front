@@ -12,7 +12,7 @@ export class ResultatPrelevementService {
   backendHost: string = "http://localhost:8080";
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
-  public getAllResultat(page: number, size: number): Observable<ResultatResponse> {
+  public getAllResultat(kw: string, numerBA: string, conforme: string,page: number, size: number): Observable<ResultatResponse> {
     let idPersonne;
     this.authService.getDecodeToken().subscribe({
       next: data => {
@@ -32,9 +32,9 @@ export class ResultatPrelevementService {
 
     let url;
     if (type === "AGENT_CONTROLE") {
-      url = `${this.backendHost}/resultatPrelevement/personne/prelevement/${idPersonne}?page=${page}&size=${size}`;
+      url = `${this.backendHost}/resultatPrelevement/personne/prelevement/${idPersonne}?page=${page}&size=${size}&keyword=${kw}&numeroBA=${numerBA}&conforme=${conforme}`;
     } else {
-      url =`${this.backendHost}/resultatPrelevement/personne/${idPersonne}?page=${page}&size=${size}`;
+      url =`${this.backendHost}/resultatPrelevement/personne/${idPersonne}?page=${page}&size=${size}&keyword=${kw}&numeroBA=${numerBA}&conforme=${conforme}`;
     }
 
     const token = localStorage.getItem("token");
@@ -62,7 +62,14 @@ export class ResultatPrelevementService {
   }
 
   public deleteResultat(id: number) {
-    return this.http.delete(`${this.backendHost}/resultatPrelevement/${id}`);
+    const token = localStorage.getItem("token");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.delete(`${this.backendHost}/resultatPrelevement/${id}`, httpOptions);
   }
 
   public saveDetailNonConformite(detail: Detail): Observable<Detail> {
@@ -89,6 +96,16 @@ export class ResultatPrelevementService {
     return this.http.get<Detail>(url,httpOptions);
   }
 
-
+  public deleteDetail(idResultat: number) {
+    let url: string = `${this.backendHost}/detailNonConformite/resultat/${idResultat}`;
+    const token = localStorage.getItem("token");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.delete(url, httpOptions);
+  }
 
 }

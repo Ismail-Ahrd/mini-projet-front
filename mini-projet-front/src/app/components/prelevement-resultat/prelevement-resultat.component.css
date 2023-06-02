@@ -6,14 +6,73 @@
 .top {
   margin-top: 30px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .top_left {
-  margin-left: 20px;
+  width: 80%;
+}
+
+.filter_form{
+  display: flex;
+  align-items: center;
+}
+
+.filter_name, .filter_etat, .filter_number {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-right: 10px;
+}
+
+.filter_name {
   width: 30%;
 }
 
+.filter_etat {
+  width: 15%;
+}
+
+.filter_number {
+  width: 20%;
+}
+
+.filter_label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3A46B5;
+}
+
+.filter_input, .filter_select  {
+  height: 35px;
+  border: solid  #2168A0 1px;
+  color: #3A46B5;
+}
+
+.filter_input_number {
+  width: 90px;
+}
+
+.filter_input {
+  font-size: 16px;
+  padding: 2px 5px;
+}
+
+.filter_btn {
+  width: 10%;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: transparent;
+  color:  #3A46B5;
+  border: solid  #3A46B5 1px;
+  height: 35px;
+}
+
+.filter_btn {
+  cursor: pointer;
+  opacity: 0.9;
+}
 .search_bar {
   display: flex;
   align-items: center;

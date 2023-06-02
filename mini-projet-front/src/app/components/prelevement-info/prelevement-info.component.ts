@@ -46,15 +46,18 @@ export class PrelevementInfoComponent implements OnInit{
 
     this.filterFormGroup = this.fb.group({
       keyword: this.fb.control(""),
+      numeroProcesVerbal: this.fb.control(""),
       etat: this.fb.control("")
     });
 
-    this.handleGetAllPrelevement("", "",  this.page, 5);
+    console.log(this.filterFormGroup.value);
+
+    this.handleGetAllPrelevement("", "", "",  this.page, 5);
 
   }
 
-  handleGetAllPrelevement(keyword: string, etat: string, page: number, size: number) {
-    this.prelevementService.getAllPrelevement(keyword,etat,page,size).subscribe({
+  handleGetAllPrelevement(keyword: string, etat: string, numeroProcesVerbal: string, page: number, size: number) {
+    this.prelevementService.getAllPrelevement(keyword,etat, numeroProcesVerbal,page,size).subscribe({
       next: data => {
         this.prelevementResponses = data;
         //console.log(data)
@@ -72,19 +75,26 @@ export class PrelevementInfoComponent implements OnInit{
 
     let keyword: string = this.filterFormGroup.value.keyword;
     let etat: string = this.filterFormGroup.value.etat;
-    this.handleGetAllPrelevement(keyword, etat, page, 5);
+    let numeroProcesVerbal: string = this.filterFormGroup.value.numeroProcesVerbal;
+    if (numeroProcesVerbal === null) {
+      numeroProcesVerbal = "";
+    }
+    this.handleGetAllPrelevement(keyword, etat, numeroProcesVerbal, page, 5);
   }
 
   handleDeletePrelevement(id: number, page: number, size: number) {
-    //console.log(id, page, size);
     let keyword: string = this.filterFormGroup.value.keyword;
     let etat: string = this.filterFormGroup.value.etat;
+    let numeroProcesVerbal: string = this.filterFormGroup.value.numeroProcesVerbal;
+    if (numeroProcesVerbal === null) {
+      numeroProcesVerbal = "";
+    }
     let conf: boolean = confirm("Êtes-vous sûr?");
     if(!conf) return
     this.prelevementService.deletePrelevement(id).subscribe({
       next: data => {
         //console.log(data);
-        this.handleGetAllPrelevement(keyword, etat, page, size);
+        this.handleGetAllPrelevement(keyword, etat, numeroProcesVerbal, page, size);
       },
       error: err => {
         console.log(err);
@@ -94,9 +104,14 @@ export class PrelevementInfoComponent implements OnInit{
 
 
   handleFilterPrelevement() {
+    console.log(this.filterFormGroup.value);
     let keyword: string = this.filterFormGroup.value.keyword;
     let etat: string = this.filterFormGroup.value.etat;
-    this.handleGetAllPrelevement(keyword, etat, 0, 5);
+    let numeroProcesVerbal: string = this.filterFormGroup.value.numeroProcesVerbal;
+    if (numeroProcesVerbal === null) {
+      numeroProcesVerbal = "";
+    }
+    this.handleGetAllPrelevement(keyword, etat, numeroProcesVerbal, 0, 5);
   }
 
   goToPrelevementForm() {

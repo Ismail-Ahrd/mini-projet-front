@@ -4,6 +4,8 @@ import {ResultatPrelevementDtos, ResultatResponse} from "../../models/resultatPr
 import {FormBuilder, FormGroup} from "@angular/forms";
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
+import {Detail} from "../../models/detail.model";
 
 @Component({
   selector: 'app-prelevement-resultat',
@@ -12,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class PrelevementResultatComponent implements OnInit{
   resultats!: ResultatResponse;
+  detail: Detail= new Detail();
   searchFormGroup!: FormGroup;
   typePersonne!: string;
 
@@ -20,7 +23,7 @@ export class PrelevementResultatComponent implements OnInit{
               private authService: AuthenticationService,
               private fb:FormBuilder,
               public authservice:AuthenticationService,
-              private Route:Router) {
+              private router:Router) {
   }
 
   ngOnInit(): void {
@@ -29,14 +32,22 @@ export class PrelevementResultatComponent implements OnInit{
     })
 
     this.searchFormGroup = this.fb.group({
-      keyword: this.fb.control("")
+      keyword: this.fb.control(""),
+      numeroBA: this.fb.control(""),
+      conforme: this.fb.control("")
     });
 
     this.handleGetAllResultat(0,5);
   }
 
   handleGetAllResultat(page: number, size: number) {
-    this.resultatService.getAllResultat(page, size).subscribe({
+    let kw= this.searchFormGroup.value.keyword;
+    let numeroBA= this.searchFormGroup.value.numeroBA;
+    let conforme= this.searchFormGroup.value.conforme;
+    if (numeroBA === null) {
+      numeroBA = "";
+    }
+    this.resultatService.getAllResultat(kw, numeroBA, conforme, page, size).subscribe({
       next: data => {
         this.resultats=data;
         this.resultats.resultatPrelevementDTOS.forEach(resultat => {
@@ -69,7 +80,24 @@ export class PrelevementResultatComponent implements OnInit{
     this.handleGetAllResultat(page, 5);
   }
 
-  handleSearchPrelevement() {
+  handleFilterResultat() {
+    this.handleGetAllResultat(0, 5)
     console.log(this.searchFormGroup.value);
+  }
+
+  handleDeleteResultat(id: number) {
+    let conf: boolean = confirm("Êtes-vous sûr?");
+    if(!conf) return
+    this.resultatService.deleteResultat(id).subscribe({
+      next: data => {
+        console.log(data);
+        this.handleGetAllResultat(0, 5);
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  handleUpdateReultat(resultat: ResultatPrelevementDtos) {
+    this.router.navigate([`resultatUpdate/${resultat.id}`, {resultat: JSON.stringify(resultat)}])
   }
 }

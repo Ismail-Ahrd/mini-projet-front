@@ -7,34 +7,39 @@
   margin-top: 30px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .top_left {
-  width: 57%;
+  width: 80%;
 }
 
 .filter_form{
   display: flex;
+  align-items: center;
 }
 
-.filter_name, .filter_etat {
+.filter_name, .filter_etat, .filter_number {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-right: 15px;
+  justify-content: space-evenly;
+  margin-right: 10px;
 }
 
 .filter_name {
-  width: 46%;
+  width: 30%;
 }
 
 .filter_etat {
-  width: 37%;
+  width: 25%;
+}
+
+.filter_number {
+  width: 28%;
 }
 
 .filter_label {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   color: #3A46B5;
 }
@@ -45,13 +50,17 @@
   color: #3A46B5;
 }
 
+.filter_input_number {
+  width: 90px;
+}
+
 .filter_input {
   font-size: 16px;
   padding: 2px 5px;
 }
 
 .filter_btn {
-  width: 16%;
+  width: 10%;
   font-size: 18px;
   font-weight: 400;
   background-color: transparent;
@@ -66,19 +75,22 @@
 }
 
 .top_right {
-  width: 40%;
-  display: flex;
-  justify-content: flex-end;
+  width: 20%;
 }
 
 .btn_add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #3A46B5;
   color: white;
   border: none;
   border-radius: 20px;
   font-size: 20px;
-  width: 23%;
+  width: 50%;
   height: 35px;
+  margin-left: auto;
+  margin-right: 5px;
 }
 
 .btn_add:hover {
